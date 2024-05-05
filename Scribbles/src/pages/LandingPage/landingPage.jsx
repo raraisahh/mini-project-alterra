@@ -12,7 +12,7 @@ const LandingPage = () => {
   return (
   <>
     {/* Navbar */}
-    <div className="navbar bg-scribbles-light shadow px-5">
+    <div className="navbar bg-scribbles-light shadow px-5 fixed top-0 left-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -37,14 +37,16 @@ const LandingPage = () => {
     </div>
 
     {/* Home  */}
-    <div className="flex h-screen" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="flex h-screen " style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <div className="w-5/12 flex items-center justify-center pl-40">
         <div className="text-start">
           <h1 className="font-playfair text-7xl text-yellow-100 font-bold mb-5">Welcome to <div className="mt-2">Scribbles!</div></h1>
           <p className="text-lg text-white mb-5">Discover a world of journaling. Explore your thoughts, memories, and dreams in a space designed just for you.</p>
           <p className="text-lg text-white mb-2">Create your first entry today!</p>
           <button className="bg-scribbles-light-purple hover:bg-scribbles-dark-purple text-white font-semibold py-2 px-4 rounded-lg mt-3 flex items-center">
-            Get Started
+            <Link to='/mainpage'>
+              Get Started
+            </Link>
             <FaArrowRight className="w-4 h-4 ml-2" />
           </button>
         </div>
@@ -53,11 +55,11 @@ const LandingPage = () => {
 
     {/* Features */}
     <div id='Features' className="bg-scribbles-light">
-      <div className="pt-16 flex flex-col items-center">
+      <div className="pt-24 flex flex-col items-center">
         <h1 className="font-playfair text-4xl font-bold text-scribbles-dark-purple mb-3">FEATURES</h1>
         <p className="text-lg text-center font-semibold text-scribbles-dark-purple opacity-90 mb-12 w-1/2">Explore the features of Scribbles that make journaling easy and delightful.</p>
       </div>
-      <div className="px-40 flex gap-12 items-center justify-center pb-16">
+      <div className="px-40 flex gap-12 items-center justify-center pb-24">
         <div className="card shadow-lg w-1/2">
           <figure className="px-10 pt-10">
             <MdAddCircleOutline className="w-16 h-16 text-scribbles-dark-purple" />
