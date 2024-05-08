@@ -6,7 +6,7 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,7 +15,7 @@ const Login = () => {
         if (username === dummyAccess.username && password === dummyAccess.password) {
             localStorage.setItem("user", JSON.stringify(dummyAccess)); // "user" itu key, kanan user, adalah value nya
             localStorage.setItem("isLoggedIn", true);
-            // navigate('/createproduct');
+            navigate('/mainpage');
         } 
         else {
             setError('Invalid username or password');
