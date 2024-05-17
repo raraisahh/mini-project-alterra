@@ -68,14 +68,16 @@ Lihat aplikasi yang telah dideploy di sini: [Scribbles Live Demo](https://mp-scr
    git clone https://github.com/raraisahh/mini-project-alterra.git
    ```
 2. Masuk ke direktori project:
-   ```cd MP-Scribbles```
-3. Install dependensi menggunakan npm atau yarn:
+   ```bash
+   cd MP-Scribbles
+   ```
+4. Install dependensi menggunakan npm atau yarn:
    ```bash
    npm install
    # atau
    yarn install
    ```
-4. Jalankan aplikasi menggunakan Vite:
+5. Jalankan aplikasi menggunakan Vite:
    ```bash
    npm run dev
    # atau
