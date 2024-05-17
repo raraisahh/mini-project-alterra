@@ -18,29 +18,6 @@ Scribbles adalah aplikasi diary sederhana yang memungkinkan pengguna untuk menul
 
 ## Tech Stacks
 
-Tentu, berikut adalah versi yang dapat langsung Anda salin dan tempel ke file README.md Anda:
-
-markdown
-Copy code
-# Scribbles
-
-## About Project
-Scribbles adalah aplikasi diary sederhana yang memungkinkan pengguna untuk menulis, mengedit, dan menghapus catatan pribadi mereka. Aplikasi ini dibangun menggunakan React.js dan Tailwind CSS untuk memberikan antarmuka yang bersih dan responsif. Scribbles dirancang untuk membantu pengguna mencatat peristiwa, pemikiran, dan perasaan mereka dengan mudah dan nyaman.
-
-## Features
-### User
-- **Menulis Catatan**: Pengguna dapat menulis dan menyimpan catatan pribadi.
-- **Edit Catatan**: Pengguna dapat mengedit catatan yang telah dibuat sebelumnya.
-- **Hapus Catatan**: Pengguna dapat menghapus catatan yang tidak diperlukan lagi.
-- **Lihat Daftar Catatan**: Pengguna dapat melihat semua catatan yang telah mereka buat dalam satu halaman.
-
-### Admin
-- **Landing Page Statik**: Menjelaskan fitur-fitur yang ada dalam aplikasi.
-- **Login User Default**: Fitur login sederhana untuk pengguna default.
-- **CS Psikolog**: Memberikan pertanyaan yang memotivasi pengguna untuk menulis cerita.
-
-## Tech Stacks
-
 ### Tools
 - **Visual Studio Code**: Editor kode yang digunakan untuk pengembangan.
 - **GitHub Desktop**: Alat untuk mengelola repositori GitHub secara lokal.
