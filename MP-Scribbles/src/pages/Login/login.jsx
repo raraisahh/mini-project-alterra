@@ -24,48 +24,60 @@ function Login () {
 
         // Validasi form
         if (!form.email || !form.password) {
-            // Menampilkan alert error 
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Email and password are required!',
+                icon: "error",
+                title: "Oops...",
+                text: "Email and password are required!",
             });
             return;
         }
-        
+
         try {
-            // Melakukan proses login
-            const { data, error } = await supabase.auth.signInWithPassword(
-            {
+            // Melakukan login dengan Supabase Auth
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email: form.email,
-                password:  form.password,
-            })
-            // console.log(data);
+                password: form.password,
+            });
+
             if (error) {
-                // Menampilkan alert jika terjadi kesalahan saat login
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
+                    icon: "error",
+                    title: "Oops...",
                     text: error.message,
                 });
-            } else {
-                // Login berhasil
-                const accessToken = data.session.access_token; 
-                if (accessToken) {
-                    // Menyimpan token ke local storage
-                    localStorage.setItem("token", accessToken);
-                    
-                    // Menampilkan alert jika login berhasil
+                return;
+            }
+
+            if (data.user) {
+                // Ambil role dari tabel profiles
+                const { data: profile, error: profileError } = await supabase
+                    .from("profiles")
+                    .select("role")
+                    .eq("id", data.user.id)
+                    .single();
+    
+                if (profileError || !profile) {
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: 'You have successfully logged in.',
-                        timer: 2000, 
-                        showConfirmButton: false 
-                    }).then(() => {
-                        navigate('/mainpage');
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Failed to fetch user role.",
                     });
+                    return;
                 }
+    
+                // Simpan token & role di localStorage dengan nilai yang benar (true/false)
+                localStorage.setItem("token", data.session.access_token);
+                localStorage.setItem("isAdmin", profile.role === "admin" ? "true" : "false"); // Simpan sebagai string "true" atau "false"
+    
+                Swal.fire({
+                    icon: "success",
+                    title: profile.role === "admin" ? "Welcome Admin!" : "Success!",
+                    text: profile.role === "admin" ? "Redirecting to admin dashboard..." : "You have successfully logged in.",
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    navigate(profile.role === "admin" ? "/admin-dashboard" : "/mainpage");
+                });
             }
         } catch (error) {
             console.error(error);

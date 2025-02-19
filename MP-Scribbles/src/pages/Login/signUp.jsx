@@ -25,46 +25,65 @@ const SignUp = () => {
         // Validasi form
         if (!form.email || !form.password || !form.username) {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'All fields are required!',
+                icon: "error",
+                title: "Oops...",
+                text: "All fields are required!",
             });
             return;
         }
 
         try {
-            // Melakukan proses sign up
-            const { data, error } = await supabase.auth.signUp(
-                {
-                    email: form.email,
-                    password:  form.password,
-                    username: form.username                
-                }
-            )
-            console.log(data)
-            // Menampilkan alert jika terjadi error saat sign up
+            // Daftarkan user ke Supabase Auth
+            const { data, error } = await supabase.auth.signUp({
+                email: form.email,
+                password: form.password,
+                username: form.username,
+            });
+
             if (error) {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
+                    icon: "error",
+                    title: "Oops...",
                     text: error.message,
                 });
-            } else {
-                // Sign up berhasil
+                return;
+            }
+
+            if (data.user) {
+                // Tentukan apakah user ini admin atau user biasa
+                const role = form.email === "admin@gmail.com" ? "admin" : "user";
+
+                // Masukkan user ke tabel profiles
+                const { error: profileError } = await supabase.from("profiles").insert([{
+                    id: data.user.id,  // ID otomatis dari Supabase Auth
+                    email: form.email,
+                    role: role
+                }]);
+
+                if (profileError) {
+                    console.error("Error inserting profile:", profileError.message);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Failed to save user profile.",
+                    });
+                    return;
+                }
+
+                // Tampilkan pesan sukses
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: 'Check your email for verification link.',
+                    icon: "success",
+                    title: "Success!",
+                    text: "Check your email for verification link.",
                 });
 
-                // Mengosongkan nilai formulir setelah submit
+                // Reset form setelah signup berhasil
                 setForm({
-                    username: '',
-                    email: '',
-                    password: ''
+                    username: "",
+                    email: "",
+                    password: ""
                 });
             }
-            // console.log(data);
         } catch (error) {
             console.error(error);
         }
